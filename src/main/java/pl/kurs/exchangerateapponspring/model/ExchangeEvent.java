@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "exchange_events")
@@ -38,5 +39,29 @@ public class ExchangeEvent implements Serializable {
         this.exchangeRate = exchangeRate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ExchangeEvent)) return false;
+        ExchangeEvent event = (ExchangeEvent) o;
+        return Objects.equals(id, event.id) && Objects.equals(date, event.date) && Objects.equals(currencyFrom, event.currencyFrom) && Objects.equals(amountFrom, event.amountFrom) && Objects.equals(currencyTo, event.currencyTo) && Objects.equals(amountTo, event.amountTo) && Objects.equals(exchangeRate, event.exchangeRate);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, currencyFrom, amountFrom, currencyTo, amountTo, exchangeRate);
+    }
+
+    @Override
+    public String toString() {
+        return "ExchangeEvent{" +
+                "id=" + id +
+                ", date=" + date +
+                ", currencyFrom='" + currencyFrom + '\'' +
+                ", amountFrom=" + amountFrom +
+                ", currencyTo='" + currencyTo + '\'' +
+                ", amountTo=" + amountTo +
+                ", exchangeRate=" + exchangeRate +
+                '}';
+    }
 }
